@@ -5,16 +5,33 @@
   "main": "index.ts",
   "scripts": {
     "start": "tsc && node dist/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha",
+    "test:watch": "mocha --watch  ",
+    "coverage": "nyc -r lcov -e .ts -x \"*.test.ts\" npm run test"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/chai": "^4.2.14",
+    "@types/mocha": "^8.2.0",
     "@types/node": "^14.14.25",
+    "chai": "^4.3.0",
+    "mocha": "^8.2.1",
+    "nyc": "^15.1.0",
+    "ts-mockito": "^2.6.1",
+    "ts-node": "^9.1.1",
     "tslint": "^5.12.1",
-    "typescript": "^3.3.3"
+    "typescript": "^3.9.7"
   },
   "dependencies": {
     "csv": "^5.3.2"
+  },
+  "mocha": {
+    "spec": "tests/**/*.test.ts",
+    "reporter": "min",
+    "recursive": true,
+    "require": "ts-node/register",
+    "watch-extensions": "ts",
+    "watch-files": ["tests/**/*.ts", "src/**/*.ts"]
   }
 }
