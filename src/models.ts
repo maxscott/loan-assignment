@@ -1,7 +1,7 @@
 /**
  * Class describes the properties and methods ubiquitous to object which aggregate and query Covenant data.
  */
-abstract class Covenantable {
+export abstract class Covenantable {
   abstract identifier: string;
   bannedStates: Set<string> = new Set()
   maxDefaultRate: number = null
@@ -20,6 +20,8 @@ abstract class Covenantable {
     if (covenant.bannedState) {
       this.bannedStates.add(covenant.bannedState)
     }
+
+    return this;
   }
 
   /**
@@ -72,7 +74,6 @@ export class Facility extends Covenantable {
 
     // ensure that all facitilies are related to their bank
     bank.addFacility(this);
-    this.maxDefaultRate = null;
   }
 
   /**
