@@ -12,8 +12,13 @@
 
 #### `DATASET=large npm start`
 
-### Running Tests
+### Running Tests (once)
 
-#### _Coming Soon_
+#### `npm test`
 
-Especially the classes in `models.ts` where the majority of the domain logic exists, and the `LoanAssigner` would be a good place to test the only current "optimization" in the sorted facility traversal.
+### Running Tests (watch)
+
+#### `npm run test:watch`
+
+### TODOs
+`Assignment` model not yet tested, and the `LoanAssigner` query logic not currently tested.

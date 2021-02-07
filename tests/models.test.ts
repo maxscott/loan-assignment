@@ -27,6 +27,61 @@ context("Bank", () => {
   });
 });
 
+context("Facility", () => {
+  let subject: Facility;
+
+  beforeEach(() => {
+    subject = new Facility(1, 100, .5, mock<Bank>());
+    subject.maxDefaultRate = .2;
+    subject.bannedStates = new Set(["NY", "CT"]);
+  });
+
+  describe("#validateAssignable()", () => {
+    it("errors with loans of too high default rate", () => {
+      throws(() => {
+        const loan = new Loan(1, .35, 125, .1, "WI");
+        subject.validateAssignable(loan);
+      });
+    });
+
+    it("errors with loans from banned state", () => {
+      throws(() => {
+        const loan = new Loan(1, .35, 50, .1, "NY");
+        subject.validateAssignable(loan);
+      });
+    });
+
+    it("errors with loans of too high default rate", () => {
+      throws(() => {
+        const loan = new Loan(1, .35, 50, .25, "WI");
+        subject.validateAssignable(loan);
+      });
+    });
+
+    it("allows loans with no validation errors", () => {
+      doesNotThrow(() => {
+        const loan = new Loan(1, .35, 50, .1, "WI");
+        subject.validateAssignable(loan);
+      });
+    });
+  });
+});
+
+context("Assignment", () => {
+  describe(".constructor()", () => {
+    it.skip("validates the loan on the facility");
+    it.skip("validates the loan on the facility's bank");
+
+    context("when successfully validated", () => {
+      it.skip("deducts the loan amount from the facility");
+    });
+
+    context("when validation fails", () => {
+      it.skip("does not deduct loan amount from the facility");
+    });
+  });
+});
+
 context("Covenantable", () => {
   let subject: TestClass;
 
